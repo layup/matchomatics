@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Document</title>  
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class='leftHeader'>
+            <div class="logo">
+                <h1>Matchomatics</h1>
+                <h3>LOVE AT ELM</h3>
+            </div>
+
+            <div class="userInfo">
+                <p>Name: {{ name }}</p>
+                <p>Age: {{ age }}</p>
+                <p>Zodiac Sign: {{ sign }}</p>
+            </div>
+        </div>
+
+        <div class="userStats">
+            <p>Overall Personal Stats</p>
+            <div class="statItem">
+                <p>Extraversion</p>
+                <div class="progressBar">
+                    <div class="progressItem" style="width:{{e}}%;">
+                        <p>{{e}}%</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="statItem">
+                <p>Agreeableness</p>
+                <div class="progressBar">
+                    <div class="progressItem" style="width:{{a}}%;">
+                        <p>{{a}}%</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="statItem">
+                <p>Openness</p>
+                <div class="progressBar">
+                    <div class="progressItem" style="width:{{o}}%;">
+                        <p>{{o}}%</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="statItem">
+                <p>Conscientiousness</p>
+                <div class="progressBar">
+                    <div class="progressItem" style="width:{{c}}%;">
+                        <p>{{c}}%</p>
+                    </div> 
+                </div>
+            </div>
+            <div class="statItem">
+                <p>Neuroticism</p>
+                <div class="progressBar">
+                    <div class="progressItem" style="width:{{n}}%;">
+                        <p>{{n}}%</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+ 
+    </header>
+
+    <div class="content">
+        <div class="matches">
+            <p>test</p>
+        </div>
+        
+    </div>
+</body>
+</html>
+
