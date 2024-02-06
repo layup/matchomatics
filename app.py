@@ -3,6 +3,7 @@ import numpy as np
 import random
 import pdfkit
 import names 
+import random
 
 from numpy import dot
 from numpy.linalg import norm 
@@ -31,6 +32,24 @@ MAX_QUESTION_POINTS = 5
 TOTAL_POINTS = TOTAL_TRAIT_QUESTIONS * MAX_QUESTION_POINTS
 
 
+ZODIAC_SIGNS = [
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces"
+]
+
+def generateStarSign():
+    return random.choice(ZODIAC_SIGNS)
+
 def userInfo(): 
     
     user = {
@@ -40,6 +59,7 @@ def userInfo():
         'birthday':'', 
     }
 
+#TODO: check the score generation for this 
 def generateArray():
     result_array = []
     
@@ -49,6 +69,7 @@ def generateArray():
             result_array.append((number, character))
 
     return result_array
+
 
 def generateFakeUserInfo(amount):
     fakeNames = []
@@ -121,34 +142,59 @@ def normalize_likert_scale(value, min_value=1, max_value=5):
     return (value - min_value) / (max_value - min_value)
 
 def printScore(users, userInfo,  showDetailed=False): 
+    
+    
+    #TODO: store the similarity scores and something else
+    
     for i, user in enumerate(users): 
         currentUser = users[i]
         currentData = userInfo[currentUser]
+
         print(f'***Current user: {currentUser}')
         
+        print(f'{"Age":<20}: {currentData["age"]}')
+        print(f'{"Star Sign":<20}: {currentData["sign"]}')
         for char, value in currentData.items(): 
-            charName = PERSONALITY_TYPE[char]
-            print(f'{charName:<20}: {value}')
+            if(char in CHARACTERS): 
+                charName = PERSONALITY_TYPE[char]
+                print(f'{charName:<20}: {value}')
+            
+        
         
         print('')
         for j in range(len(users)): 
             if(i != j): 
                 comparingUser = users[j]
-                compareData = userInfo[comparingUser]
+                #compareData = userInfo[comparingUser]
+                
+                temp = {}
+                temp['e'] = currentData['e']
+                temp['a'] = currentData['a']
+                temp['o'] = currentData['o']
+                temp['c'] = currentData['c']
+                temp['n'] = currentData['n']
+                
+                compareData = {}
+                compareData['e'] = userInfo[comparingUser]['e']
+                compareData['a'] = userInfo[comparingUser]['a']
+                compareData['o'] = userInfo[comparingUser]['o']
+                compareData['c'] = userInfo[comparingUser]['c']
+                compareData['n'] = userInfo[comparingUser]['n']
+
             
                 # Calculate overall compatibility
-                overall_compatibility = calculate_overall_compatibility(currentData, compareData, TRAIT_WEIGHTS)
+                overall_compatibility = calculate_overall_compatibility(temp, compareData, TRAIT_WEIGHTS)
 
                 # Calculate the similiarity 
-                similarityScore = calculate_overall_compatibility(currentData, compareData, TRAIT_WEIGHTS) 
+                similarityScore = calculate_overall_compatibility(temp, compareData, TRAIT_WEIGHTS) 
                 
                 # Print the results
                 print(f'{comparingUser:<20} Similarity Score: {similarityScore:.2%}')
                 if(showDetailed): 
                     print()
                     print(f"Trait Similarity Scores:")
-                    for trait in currentData:
-                        similarity_score = calculate_trait_similarity(currentData[trait], compareData[trait])
+                    for trait in temp:
+                        similarity_score = calculate_trait_similarity(temp[trait], compareData[trait])
                         print(f"{trait}: {similarity_score:.2%}")
 
                     print("\nOverall Compatibility:")
@@ -167,11 +213,13 @@ def generateTemplate(outputName, userInfo):
     o = userInfo['e'] * 100 
     c = userInfo['c'] * 100 
     n = userInfo['n'] * 100
+    user_age = userInfo['age'] 
+    user_sign = userInfo['sign']
     
     data = {
         'name': outputName, 
-        'age': 26, 
-        'sign': 'cancer',
+        'age': user_age, 
+        'sign': user_sign,
         'e': f'{e:.1f}', 
         'a': f'{a:.1f}',
         'o': f'{o:.1f}',
@@ -189,8 +237,8 @@ def generateTemplate(outputName, userInfo):
     filePath2 = os.path.join('results/', pdfName)
      
     # Save the rendered HTML to a file
-    with open(filePath, 'w') as f:
-        f.write(output_html)
+    #with open(filePath, 'w') as f:
+    #    f.write(output_html)
         
     #write the pdf
     #pdfkit.from_string(output_html, filePath2) 
@@ -202,10 +250,6 @@ def basicInfo():
 
 if __name__ == '__main__': 
     
-    users = ['Shelley', 'Eric', 'Ben', 'Jordan', 'Evan', 'Marc', 'Rebecca', 'Jonah', 'Rhett', 'Sam', 
-             'Connor', 'Maja', 'Emma', 'Kayleigh', 'Andrew']
-    
-    #users = ['Jonah', 'Rebecca', 'Rhett', 'LJ']
 
     users = generateFakeUserInfo(20)
 
@@ -214,17 +258,21 @@ if __name__ == '__main__':
     #general information 
     totalUsers = len(users)
 
-
+    
     print('**USER DATA')
     for user in users: 
         rawData = generateArray() 
         results = calculateStats(rawData)
+        sign = generateStarSign()
+        results['sign'] = sign
+        results['age'] = random.randint(20, 29)
         userInfo[user] = results 
-        
+ 
         print(f'{user}: {results}')
     
     print()
- 
+
+
     for i, user in enumerate(users): 
         currentUser = users[i]
         currentData = userInfo[currentUser]
@@ -232,9 +280,9 @@ if __name__ == '__main__':
 
     printScore(users, userInfo, False)
     
-    for userName, data in userInfo.items(): 
-       generateTemplate(userName, data) 
-                
+    #for userName, data in userInfo.items(): 
+    #   generateTemplate(userName, data) 
+           
 
                 
             

@@ -23,7 +23,7 @@
         </div>
 
         <div class="userStats">
-            <p>Overall Personal Stats</p>
+            <p style="font-weight: bold; text-align:right; ">Overall Personal Stats</p>
             <div class="statItem">
                 <p>Extraversion</p>
                 <div class="progressBar">
@@ -70,9 +70,125 @@
 
     <div class="content">
         <div class="matches">
-            <p>test</p>
+            <table>
+                <caption>Most Similiar</caption>
+                <tr>
+                    <th>Matches</th>
+                    <th>Age</th>
+                    <th>Zodiac Sign</th>
+                    <th>Their %</th>
+                    <th>Your %</th>
+                </tr>
+                <tr>
+                    <td>{{s_name1}}</td>
+                    <td>{{s_age1}}</td>
+                    <td>{{s_sign1}}</td>
+                    <td>{{s_theirs1}}</td>
+                    <td>{{s_yours1}}</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>25</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+              </table> 
+              
         </div>
         
+        <div class="matches">
+            <table>
+                <caption>Most Opposite</caption> 
+                <tr>
+                    <th>Matches</th>
+                    <th>Age</th>
+                    <th>Zodiac Sign</th>
+                    <th>Their %</th>
+                    <th>Your %</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>25</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>26</td>
+                    <td>Aries</td>
+                    <td>80%</td>
+                    <td>92%</td>
+                </tr>
+              </table> 
+
+        </div>
+    </div>
+
+    <div class="stats">
+
+        <div>
+            <h3 style="text-align: center;">Definitions</h3>
+            <dl>
+                <dt>Extraversion:</dt>
+                <dd>Measures sociability, assertiveness, and enjoyment of social interactions; high extraversion indicates outgoing and talkative tendencies</dd>
+              
+                <dt>Agreeableness:</dt>
+                <dd>Indicates kindness, cooperativeness, and empathy; high agreeableness suggests compassion and consideration</dd>
+              
+                <dt>Openness:</dt>
+                <dd>Willingness to embrace new ideas and experiences; high openness signifies creativity and curiosity</dd>
+
+                <dt>Conscientiousness:</dt>
+                <dd>Reflects organizational skills, responsibility, and reliability; high conscientiousness implies diligence and goal-oriented behavior</dd>
+
+                <dt>Neuroticism (Emotional Stability):</dt>
+                <dd>Measures emotional stability and resilience; high neuroticism indicates a tendency towards negative emotions like anxiety and stress</dd>
+
+              </dl>
+        </div>
+
+        <div class="footer">
+            <p>Printout {{number}} of {{total}}</p>
+            <p>Printed {{date}}</p>
+            <p>You where matched with {{total}} People</p>
+        </div>
     </div>
 </body>
 </html>
